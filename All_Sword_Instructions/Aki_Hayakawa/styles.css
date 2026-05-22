@@ -1,0 +1,90 @@
+
+* {
+  box-sizing:border-box
+}
+
+.Single_Product_Page {
+  background-color: #F9FAFB;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  font-family: georgia;
+  line-height: 2;
+}
+h1 {
+	font-size: 48px;
+	text-align: left;
+}
+h2 {
+	font-size: 36px;
+	text-align: left;
+}
+h3 {
+	font-size: 24px;
+	text-align: left;
+}
+p {
+	font-size:20px;
+	text-align: left;
+}
+
+img {
+	vertical-align: middle;
+}
+
+
+.AddToCart {
+	background-color: #1A7EE0;
+	color: white;
+	font-size: 20px;
+	padding-left: 15%;
+	padding-right: 15%;
+	padding-bottom: 1.5%;
+	padding-top: 1.5%;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-family: georgia;
+	cursor: pointer;
+	border: none;
+	border-radius: 10px;
+}
+
+AddToCart:hover, AddToCart:active {
+  background-color: #045CB4;
+}
+
+div.SingleProduct {
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+div.SingleProduct div{
+  padding-left: 2%;
+  padding-right: 2%;
+  padding-bottom: 2.5%;
+  padding-top: 0%;
+}
+
+hr {
+	color: black;
+	width: 100%;
+	text-align: center;
+	height: 1px;
+	background-color: black;
+}
+
+mark.Sword_Instructions_Box{
+	padding-left: 1%;
+	padding-right: 1%;
+	padding-bottom: 0.5%;
+	padding-top: 0.5%;
+	border:2px solid #1A7EE0;
+	background-color: white;
+}
+.resize {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  display: block;
+}

@@ -1,0 +1,791 @@
+* {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+}  
+body {
+  font-family: Georgia, serif;
+  line-height: 1.5;
+}
+
+.box {
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 1px;
+  padding-top: 5%;
+  background-color: #F9FAFB;
+  display: flex; 
+  flex-wrap: wrap; 
+  justify-content: center;
+}
+
+
+
+/* Modern Navbar */
+.navbar {
+  display: flex;
+  align-items: stretch;        /* All sections match the tallest one */
+  justify-content: space-between;
+  padding: 0 10%;
+  background: white;
+  border-bottom: 1px solid #DFDFDF;
+  padding-top: 12px; 
+  padding-bottom: 12px;
+}
+
+/* Shared section styling */
+.nav-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo section */
+.nav-logo {
+  width: 20%;
+}
+.nav-logo img {
+  width: 80%;
+  height: auto;
+  display: block;
+}
+/* Middle links */
+.nav-links {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  gap: 1vw;
+}
+/* Search section */
+.nav-search {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+}
+/* Individual colored boxes */
+.nav-item {
+  flex: 1;
+  display: flex;
+  align-items: center;       /* vertical centering */
+  justify-content: center;   /* horizontal centering */
+  padding: 1vw 0;
+  text-decoration: none;
+  color: black;
+ font-size: clamp(18px, 2vw, 26px);
+}
+.nav-item:hover {
+  color: #046BD2;          /* same blue as your slider dots */
+  transition: color 0.25s ease;
+}
+
+.navbar a,
+.navbar a:visited,
+.navbar a:hover,
+.navbar a:active {
+  text-decoration: none;
+}
+
+
+/* Mobile */
+@media (max-width: 960px) {
+  .navbar {
+    flex-direction: column;
+    padding: 0;
+    padding-top: 12px; 
+    padding-bottom: 12px;
+  }
+
+  /* Make the logo section full-width and centered */
+  .nav-logo {
+    width: 100%;
+    display: flex;
+    justify-content: center;   /* centers the link horizontally */
+    align-items: center;
+    text-align: center;
+  }
+
+  /* Make the logo image smaller AND centered */
+  .nav-logo img {
+    width: 1000%;                /* ← change this number to resize the logo */
+    max-width: 280px;          /* optional safety cap */
+    height: auto;
+    display: block;
+    margin: 0 auto;            /* ensures perfect centering */
+  }
+ .nav-links, 
+ .nav-search { 
+  display: none; 
+ }
+  .nav-item {
+    flex: 1 1 45%;
+    font-size: 16px;
+  }
+  .navbar-five-sections_3, .navbar-five-sections_4 { 
+    display: none; 
+  }
+}
+
+
+
+h1 {
+  font-size: 64px;
+  text-align: center;
+  margin-top: 0;
+}
+h2 {
+  font-size: 48px;
+  text-align: center;
+  margin-top: 0;
+}
+p {
+  font-size: 24px;
+  text-align: center;
+  margin-top: 0;
+}
+.resize {
+  width: 100%;
+  max-width: max-content;
+}
+
+
+.paragraph_container {
+  max-width: 60vw;
+  width: 100%;
+  margin: 0 auto;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+
+.paragraph_container h2 {
+  font-size: clamp(32px, 3vw, 48px);
+}
+.paragraph_container p {
+  font-size: clamp(16px, 1.6vw, 20px);
+}
+/* Make all major section headers scale like "My Biggest Build Yet!" */
+.section-header {
+  font-size: clamp(32px, 3vw, 48px);
+  text-align: center;
+  margin-top: 0;
+}
+
+
+
+/* Image strip */
+.image-container {
+  width: 300%;
+  display: flex;
+  transition: transform 0.8s ease-in-out;
+}
+/* Responsive images */
+.slider-image {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  max-height: 600px;
+  object-fit: contain;
+  border-radius: 8px;          /* optional, matches your portfolio boxes */
+}
+
+
+
+
+
+/* -------------------------------------- */
+/* UNIVERSAL SLIDER STRUCTURE             */
+/* -------------------------------------- */
+
+.Slide-Container {
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  color: black;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+/* Image strip */
+.image-container {
+  display: flex;
+  width: 300%; /* 3 images */
+  transition: transform 0.8s ease-in-out;
+}
+
+/* Images */
+.slider-image {
+  width: 100%;
+  height: auto;
+  flex-shrink: 0;
+  max-height: 600px;
+  object-fit: contain;
+}
+
+/* Default slide (when no :target is active) */
+.Slide-Container:not(:has(:target)) .image-container {
+  transform: translateX(0%);
+}
+
+/* -------------------------------------- */
+/* SLIDE POSITIONING (3 slides each)      */
+/* -------------------------------------- */
+
+#slider-image-1:target ~ .image-container,
+#slider-image-4:target ~ .image-container,
+#slider-image-7:target ~ .image-container {
+  transform: translateX(0%);
+}
+
+#slider-image-2:target ~ .image-container,
+#slider-image-5:target ~ .image-container,
+#slider-image-8:target ~ .image-container {
+  transform: translateX(calc(-100% / 3));
+}
+
+#slider-image-3:target ~ .image-container,
+#slider-image-6:target ~ .image-container,
+#slider-image-9:target ~ .image-container {
+  transform: translateX(calc(-200% / 3));
+}
+
+/* -------------------------------------- */
+/* ARROWS                                 */
+/* -------------------------------------- */
+
+.arrows {
+  display: none;
+}
+
+.arrow {
+  position: absolute;
+  top: 50%;                     /* centered vertically */
+  transform: translateY(-50%);
+  font-size: 2vmin;
+  color: white;
+  background: black;
+  text-decoration: none;
+  padding: 0.5vmin 1.5vmin;
+  border-radius: 20%;
+  user-select: none;
+}
+
+.arrow:hover {
+  background: #046BD2;
+}
+
+.arrow-left { left: 2vmin; }
+.arrow-right { right: 2vmin; }
+
+/* Show correct arrows for each slide */
+#slider-image-1:target ~ .arrows-1,
+#slider-image-2:target ~ .arrows-2,
+#slider-image-3:target ~ .arrows-3,
+.Slide-Container:not(:has(:target)) .arrows-1 {
+  display: block;
+}
+
+#slider-image-4:target ~ .arrows-4,
+#slider-image-5:target ~ .arrows-5,
+#slider-image-6:target ~ .arrows-6,
+.Slide-Container:not(:has(:target)) .arrows-4 {
+  display: block;
+}
+
+#slider-image-7:target ~ .arrows-7,
+#slider-image-8:target ~ .arrows-8,
+#slider-image-9:target ~ .arrows-9,
+.Slide-Container:not(:has(:target)) .arrows-7 {
+  display: block;
+}
+
+/* -------------------------------------- */
+/* DOTS                                   */
+/* -------------------------------------- */
+
+.button-container {
+  margin-top: 1rem;
+}
+
+.slider-button {
+  cursor: pointer;
+  height: 1.25vmin;
+  width: 1.25vmin;
+  margin: 0.5%;
+  border-radius: 50%;
+  background-color: black;
+  display: inline-block;
+}
+
+/* Active dot */
+#slider-image-1:target ~ .button-container a[href="#slider-image-1"],
+#slider-image-2:target ~ .button-container a[href="#slider-image-2"],
+#slider-image-3:target ~ .button-container a[href="#slider-image-3"],
+.Slide-Container:not(:has(:target)) .button-container a[href="#slider-image-1"],
+#slider-image-4:target ~ .button-container a[href="#slider-image-4"],
+#slider-image-5:target ~ .button-container a[href="#slider-image-5"],
+#slider-image-6:target ~ .button-container a[href="#slider-image-6"],
+.Slide-Container:not(:has(:target)) .button-container a[href="#slider-image-4"],
+#slider-image-7:target ~ .button-container a[href="#slider-image-7"],
+#slider-image-8:target ~ .button-container a[href="#slider-image-8"],
+#slider-image-9:target ~ .button-container a[href="#slider-image-9"],
+.Slide-Container:not(:has(:target)) .button-container a[href="#slider-image-7"] {
+  background-color: #046BD2;
+}
+
+/* -------------------------------------- */
+/* LAYOUT FIXES FOR SLIDER CONTAINERS     */
+/* -------------------------------------- */
+
+.Slide-Combo-Gallery {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 5vw;
+  background-color: #F9FAFB;
+}
+
+/* Mobile: stack sliders vertically */
+@media (max-width: 960px) {
+  .Slide-Combo-Gallery {
+    width: 100%;
+    margin-bottom: 6vw;
+  }
+}
+
+
+/* Match slider border to Full Portfolio boxes */
+.Slide-Container {
+  background-color: #F9FAFB;
+  border-radius: 8px;
+  overflow: hidden;
+  text-align: center;
+  position: relative;
+  color: black;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+/* Keep Most Popular + Latest Creations visually aligned after moving them */
+.slider-outside {
+  padding-left: 10%;
+  padding-right: 10%;
+  background-color: #F9FAFB;
+  margin-top: 5vw;
+}
+
+
+
+
+
+/* Full Portfolio → Navbar-style layout */
+.full-portfolio-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2vw;
+  padding: 0 10%;
+  background-color: #F9FAFB;
+    padding-bottom: 5%;
+}
+
+/* Each category box */
+.Two-Sword-Gallery {
+  display: flex;
+  flex-direction: column;
+  width: calc(50% - 2vw);   /* max 2 columns */
+  min-width: 260px;
+  background-color: white;
+  border: 1px solid #DFDFDF;
+  border-radius: 8px;
+  overflow: hidden;
+
+  /* REMOVE ALL INTERNAL WHITE SPACE */
+  padding: 0;
+  margin: 0;
+}
+
+/* Title bar */
+.Title_Container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem 0;   /* keeps your look without adding box padding */
+  font-size: 18px;
+  font-family: georgia;
+  margin: 0;            /* remove inherited spacing */
+  background-color: #E6E6E6;
+}
+
+/* Image area */
+.Image_Container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  /* REMOVE WHITE PADDING AROUND IMAGES */
+  padding: 0;
+  margin: 0;
+}
+
+/* Make portfolio images match slider image sizing */
+.Image_Container img {
+  width: 100%;
+  height: auto;
+  max-height: 600px;     /* same as slider */
+  object-fit: contain;   /* prevents cropping */
+  display: block;
+}
+
+
+/* Mobile behavior */
+@media (max-width: 960px) {
+  .full-portfolio-row {
+    padding-right: 10%;
+    padding-left: 10%;
+  }
+
+  .Two-Sword-Gallery {
+    width: 100%;
+    margin-bottom: 4vw;
+  }
+
+  .Slide-Combo-Gallery {
+    width: 100%;      /* one per row */
+    float: none;      /* prevents weird wrapping */
+    margin-bottom: 6vw;
+  }
+}
+
+
+
+
+
+
+ <!DOCTYPE html>
+<html lang="en-US">
+<head>
+
+<title>Tanner Ideas</title>
+<link rel="icon" type="image/png" href="C:\Users\tjbun\Desktop\favicon.png">
+<link rel="stylesheet" href="styles.css">
+</head>
+
+
+<body>
+
+<div class="navbar">
+
+    <div class="nav-section nav-logo">
+        <a href="https://tannerideas.com/" target="_blank">
+            <img src="https://tannerideas.com/wp-content/uploads/2024/07/cropped-Website-Logo-With-Website-Name-scaled-600x150.png" 
+                 alt="Website Header Logo">
+        </a>
+    </div>
+
+    <div class="nav-section nav-links">
+        <a class="nav-item" href="#">Gallery</a>
+        <a class="nav-item" href="#">Instructions</a>
+        <a class="nav-item" href="#">Commissions</a>
+        <a class="nav-item" href="#">About</a>
+    </div>
+
+    <div class="nav-section nav-search">
+        <a class="nav-item" href="#">Search</a>
+    </div>
+
+</div>
+
+
+<div class="box">
+	<div class="Slide-Combo-Gallery">
+		
+		<div class="paragraph_container">
+			<h2>My Biggest Build Yet!</h2>
+			<p>
+				While not available for purchase, this life-size Soul Eater Scythe is my most ambitious project to date.
+				<br><br>
+				The 7-foot-tall MOC uses over 4500 LEGO pieces.
+			</p>
+		</div>
+	</div>
+	<div class="Slide-Combo-Gallery">
+		<div class="Slide-Container">
+
+			<!-- Slide anchors -->
+			<span id="slider-image-1"></span>
+			<span id="slider-image-2"></span>
+			<span id="slider-image-3"></span>
+
+			<!-- Images -->
+			<div class="image-container">
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2025/04/Soul-Eater-Sythe-V2_2.png" class="slider-image">
+				</div>
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2025/04/Soul-Eater-Sythe-V2_3.png" class="slider-image">
+				</div>
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2025/04/Soul-Eater-Sythe-V2.png" class="slider-image">
+				</div>
+			</div>
+
+			<!-- Arrows for slide 1 -->
+			<div class="arrows arrows-1">
+				<a href="#slider-image-3" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-2" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Arrows for slide 2 -->
+			<div class="arrows arrows-2">
+				<a href="#slider-image-1" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-3" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Arrows for slide 3 -->
+			<div class="arrows arrows-3">
+				<a href="#slider-image-2" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-1" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Dots -->
+			<div class="button-container">
+				<a href="#slider-image-1" class="slider-button"></a>
+				<a href="#slider-image-2" class="slider-button"></a>
+				<a href="#slider-image-3" class="slider-button"></a>
+			</div>
+
+		</div>
+
+	</div>
+
+
+
+	<div class="Slide-Combo-Gallery">
+			<div>
+				<h2 class="section-header">Most Popular</h2> 
+			</div>
+		<div class="Slide-Container">
+
+
+			<!-- Slide anchors -->
+			<span id="slider-image-7"></span>
+			<span id="slider-image-8"></span>
+			<span id="slider-image-9"></span>
+
+			<!-- Images -->
+			<div class="image-container">
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2024/05/Katen-Kyokotsu-1536x864.jpg" class="slider-image">
+				</div>
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2024/05/Shusui-Full-Arch.jpg" class="slider-image">
+				</div>
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2025/07/The-Elucidator-V3_8.png" class="slider-image">
+				</div>
+			</div>
+
+			<!-- Arrows for slide 1 -->
+			<div class="arrows arrows-7">
+				<a href="#slider-image-9" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-8" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Arrows for slide 2 -->
+			<div class="arrows arrows-8">
+				<a href="#slider-image-7" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-9" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Arrows for slide 3 -->
+			<div class="arrows arrows-9">
+				<a href="#slider-image-8" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-7" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Dots -->
+			<div class="button-container">
+				<a href="#slider-image-7" class="slider-button"></a>
+				<a href="#slider-image-8" class="slider-button"></a>
+				<a href="#slider-image-9" class="slider-button"></a>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="Slide-Combo-Gallery">
+			<div>
+				<h2 class="section-header">Latest Creations</h2> 
+			</div>
+		<div class="Slide-Container">
+
+
+			<!-- Slide anchors -->
+			<span id="slider-image-4"></span>
+			<span id="slider-image-5"></span>
+			<span id="slider-image-6"></span>
+
+			<!-- Images -->
+			<div class="image-container">
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2024/05/Ame-No-Habakiri-Full-Arch_4.jpg" class="slider-image">
+				</div>
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2024/05/Enma-Full-Arch.jpg" class="slider-image">
+				</div>
+				<div>
+					<img src="https://tannerideas.com/wp-content/uploads/2024/05/Kyojuro-Rengoku.jpg" class="slider-image">
+				</div>
+			</div>
+
+			<!-- Arrows for slide 1 -->
+			<div class="arrows arrows-4">
+				<a href="#slider-image-6" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-5" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Arrows for slide 2 -->
+			<div class="arrows arrows-5">
+				<a href="#slider-image-4" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-6" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Arrows for slide 3 -->
+			<div class="arrows arrows-6">
+				<a href="#slider-image-5" class="arrow arrow-left">❮</a>
+				<a href="#slider-image-4" class="arrow arrow-right">❯</a>
+			</div>
+
+			<!-- Dots -->
+			<div class="button-container">
+				<a href="#slider-image-4" class="slider-button"></a>
+				<a href="#slider-image-5" class="slider-button"></a>
+				<a href="#slider-image-6" class="slider-button"></a>
+			</div>
+
+		</div>
+	</div>
+
+<h2 class="section-header">Full Portfolio</h2>
+
+</div>
+
+
+<div class="full-portfolio-row">
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Black Clover</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/black-clover-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2025/07/Yami-Sukehiro-1536x864.png" alt="Black Clover">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Bleach</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/products/shunsui-kyoraku-katen-kyokotsu/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2024/05/Katen-Kyokotsu-1536x864.jpg" alt="Bleach">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Chainsaw Man</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/chainsaw-man-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2025/07/Aki-Hayakawa.png" alt="Chainsaw Man">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Demon Slayer</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/demon-slayer-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2024/05/Kyojuro-Rengoku.jpg" alt="Demon Slayer">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Fire Force</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/fire-force-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2025/07/Sho-Kusakabe-Katana-V1.png" alt="Fire Force">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Jujutsu Kaisen</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/jujutsu-kaisen-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2024/07/yuta-okkotsu-red-V1_2-scaled.jpg" alt="Jujutsu Kaisen">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Metal Gear Solid</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/metal-gear-solid-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2024/07/Muramasa-V1.jpg" alt="Metal Gear Solid">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>One Piece</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/one-piece-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2024/05/Shusui-Full-Arch.jpg" alt="One Piece">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Seven Deadly Sins</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/seven-deadly-sins-inspired-swords/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2024/05/LostVayne-V1_4.jpg" alt="Seven Deadly Sins">
+            </a>
+        </div>
+    </div>
+
+    <div class="Two-Sword-Gallery">
+        <div class="Title_Container"><p>Sword Art Online</p></div>
+        <div class="Image_Container">
+            <a href="https://tannerideas.com/product-category/sword-art-online/" target="_blank">
+                <img src="https://tannerideas.com/wp-content/uploads/2025/07/The-Elucidator-V3_8.png" alt="Sword Art Online">
+            </a>
+        </div>
+    </div>
+
+</div>
+
+</body>
+
+<script>
+  (function () {
+    let lastY = window.scrollY;
+
+    // Before the hash changes, remember where we are
+    document.addEventListener('click', function (e) {
+      if (e.target.closest('.arrow, .slider-button')) {
+        lastY = window.scrollY;
+      }
+    });
+
+    // After the hash changes, jump back to the saved scroll position
+    window.addEventListener('hashchange', function () {
+      window.scrollTo(0, lastY);
+    });
+  })();
+</script>
+
+
+
+</html> 

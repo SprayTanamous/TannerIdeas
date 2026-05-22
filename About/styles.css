@@ -1,0 +1,52 @@
+* {
+  box-sizing: border-box;
+}
+@media only screen and (max-width: 960px) {
+  .Three-Sword-Gallery_Test {
+    width: 100%;
+  }
+}
+
+body {
+  background-color: #F9FAFB;
+  padding-left: 10%;
+  padding-right: 10%;
+  padding-bottom: 5%;
+  padding-top: 5%;
+  font-family: georgia;
+  line-height: 1.5;
+}
+h1 {
+  font-size: 48px;
+  text-align: center;
+}
+p {
+  font-size: 20px;
+  text-align: left;
+}
+hr {
+  height: 0.2rem;
+  background-color: black;
+  border-color: black;
+}
+
+div.Image_Container {
+  margin-left: 0.5vw;
+  margin-right: 0.5vw;
+
+
+  
+  background-color: #E6E6E6;
+  border: 1px solid #DFDFDF;
+  border-radius: 8px;
+  overflow: hidden;
+}
+div.Title_Container {
+  display: grid;
+  grid-template-columns: 100%;
+  background-color: #F9FAFB;
+}
+div.Title_Container div {
+  text-align: center;
+  font-size: 10px;
+}
